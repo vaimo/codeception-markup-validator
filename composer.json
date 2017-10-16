@@ -1,5 +1,5 @@
 {
-    "name": "kolyunya/codeception-markup-validator",
+    "name": "vaimo/codeception-markup-validator",
     "description": "Markup validator module for Codeception.",
     "license": "LGPL-3.0",
     "type": "library",
@@ -31,8 +31,8 @@
     },
     "autoload": {
         "psr-4": {
-            "Kolyunya\\Codeception\\": "sources",
-            "Kolyunya\\Codeception\\Tests\\": "tests"
+            "Vaimo\\Codeception\\": "sources",
+            "Vaimo\\Codeception\\Tests\\": "tests"
         }
     }
 }
