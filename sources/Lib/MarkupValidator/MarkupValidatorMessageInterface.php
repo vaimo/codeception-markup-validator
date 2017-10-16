@@ -1,6 +1,6 @@
 <?php
 
-namespace Kolyunya\Codeception\Lib\MarkupValidator;
+namespace Vaimo\Codeception\Lib\MarkupValidator;
 
 /**
  * An interface of a markup validator message.

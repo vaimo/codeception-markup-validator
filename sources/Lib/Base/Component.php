@@ -1,10 +1,7 @@
 <?php
+namespace Vaimo\Codeception\Lib\Base;
 
-namespace Kolyunya\Codeception\Lib\Base;
-
-use Kolyunya\Codeception\Lib\Base\ComponentInterface;
-
-abstract class Component implements ComponentInterface
+abstract class Component implements \Vaimo\Codeception\Lib\Base\ComponentInterface
 {
     /**
      * Component configuration array.

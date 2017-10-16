@@ -1,10 +1,10 @@
 <?php
 
-namespace Kolyunya\Codeception\Lib\MarkupValidator;
+namespace Vaimo\Codeception\Lib\MarkupValidator;
 
-use Kolyunya\Codeception\Lib\Base\Component;
-use Kolyunya\Codeception\Lib\MarkupValidator\MarkupValidatorMessageInterface;
-use Kolyunya\Codeception\Lib\MarkupValidator\MessagePrinterInterface;
+use Vaimo\Codeception\Lib\Base\Component;
+use Vaimo\Codeception\Lib\MarkupValidator\MarkupValidatorMessageInterface;
+use Vaimo\Codeception\Lib\MarkupValidator\MessagePrinterInterface;
 
 /**
  * Default markup validator message printer.

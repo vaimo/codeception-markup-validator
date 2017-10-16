@@ -1,8 +1,8 @@
 <?php
 
-namespace Kolyunya\Codeception\Lib\MarkupValidator;
+namespace Vaimo\Codeception\Lib\MarkupValidator;
 
-use Kolyunya\Codeception\Lib\MarkupValidator\MarkupValidatorMessageInterface;
+use Vaimo\Codeception\Lib\MarkupValidator\MarkupValidatorMessageInterface;
 
 /**
  * Base markup validator message.

@@ -33,7 +33,7 @@ modules:
     enabled:
         - PhpBrowser:
             url: 'http://localhost/'
-        - Kolyunya\Codeception\Module\MarkupValidator
+        - Vaimo\Codeception\Module\MarkupValidator
 ```
 
 Build the test suit:
@@ -90,7 +90,7 @@ modules:
     enabled:
         - PhpBrowser:
             url: 'http://localhost/'
-        - Kolyunya\Codeception\Module\MarkupValidator:
+        - Vaimo\Codeception\Module\MarkupValidator:
             provider:
                 class: Acme\Tests\Path\To\CustomMarkupProvider
 ```
@@ -103,7 +103,7 @@ modules:
     enabled:
         - PhpBrowser:
             url: 'http://localhost/'
-        - Kolyunya\Codeception\Module\MarkupValidator:
+        - Vaimo\Codeception\Module\MarkupValidator:
             validator:
                 class: Acme\Tests\Path\To\CustomMarkupValidator
 ```
@@ -116,9 +116,9 @@ modules:
     enabled:
         - PhpBrowser:
             url: 'http://localhost/'
-        - Kolyunya\Codeception\Module\MarkupValidator:
+        - Vaimo\Codeception\Module\MarkupValidator:
             filter:
-                class: Kolyunya\Codeception\Lib\MarkupValidator\DefaultMessageFilter
+                class: Vaimo\Codeception\Lib\MarkupValidator\DefaultMessageFilter
                 config:
                     errorCountThreshold: 10
                     ignoreWarnings: true
@@ -135,7 +135,7 @@ modules:
     enabled:
         - PhpBrowser:
             url: 'http://localhost/'
-        - Kolyunya\Codeception\Module\MarkupValidator:
+        - Vaimo\Codeception\Module\MarkupValidator:
             printer:
                 class: Acme\Tests\Path\To\CustomMessagePrinter
 ```

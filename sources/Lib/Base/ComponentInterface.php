@@ -1,6 +1,6 @@
 <?php
 
-namespace Kolyunya\Codeception\Lib\Base;
+namespace Vaimo\Codeception\Lib\Base;
 
 interface ComponentInterface
 {

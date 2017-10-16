@@ -1,13 +1,13 @@
 <?php
 
-namespace Kolyunya\Codeception\Lib\MarkupValidator;
+namespace Vaimo\Codeception\Lib\MarkupValidator;
 
 use Codeception\Lib\ModuleContainer;
 use Codeception\Module\PhpBrowser;
 use Codeception\Module\WebDriver;
 use Exception;
-use Kolyunya\Codeception\Lib\Base\Component;
-use Kolyunya\Codeception\Lib\MarkupValidator\MarkupProviderInterface;
+use Vaimo\Codeception\Lib\Base\Component;
+use Vaimo\Codeception\Lib\MarkupValidator\MarkupProviderInterface;
 
 /**
  * Default markup provider which attemps to get markup from

@@ -1,11 +1,11 @@
 <?php
 
-namespace Kolyunya\Codeception\Tests\Module;
+namespace Vaimo\Codeception\Tests\Module;
 
 use Codeception\Lib\ModuleContainer;
 use Exception;
-use Kolyunya\Codeception\Lib\MarkupValidator\DefaultMessageFilter;
-use Kolyunya\Codeception\Module\MarkupValidator;
+use Vaimo\Codeception\Lib\MarkupValidator\DefaultMessageFilter;
+use Vaimo\Codeception\Module\MarkupValidator;
 use PHPUnit\Framework\TestCase;
 use PHPUnit_Framework_MockObject_MockObject;
 
@@ -61,7 +61,7 @@ class MarkupValidatorTest extends TestCase
         $this->setExpectedException('Exception', vsprintf($exceptionTemplate, array(
             'stdClass',
             'provider',
-            'Kolyunya\Codeception\Lib\MarkupValidator\MarkupProviderInterface',
+            'Vaimo\Codeception\Lib\MarkupValidator\MarkupProviderInterface',
         )));
 
         $this->module = new MarkupValidator($this->moduleContainer, array(
@@ -77,7 +77,7 @@ class MarkupValidatorTest extends TestCase
         $this->setExpectedException('Exception', vsprintf($exceptionTemplate, array(
             'stdClass',
             'validator',
-            'Kolyunya\Codeception\Lib\MarkupValidator\MarkupValidatorInterface',
+            'Vaimo\Codeception\Lib\MarkupValidator\MarkupValidatorInterface',
         )));
 
         $this->module = new MarkupValidator($this->moduleContainer, array(
@@ -93,7 +93,7 @@ class MarkupValidatorTest extends TestCase
         $this->setExpectedException('Exception', vsprintf($exceptionTemplate, array(
             'stdClass',
             'filter',
-            'Kolyunya\Codeception\Lib\MarkupValidator\MessageFilterInterface',
+            'Vaimo\Codeception\Lib\MarkupValidator\MessageFilterInterface',
         )));
 
         $this->module = new MarkupValidator($this->moduleContainer, array(
@@ -120,7 +120,7 @@ class MarkupValidatorTest extends TestCase
 
         $this->module = new MarkupValidator($this->moduleContainer, array(
             'filter' => array(
-                'class' => 'Kolyunya\Codeception\Lib\MarkupValidator\DefaultMessageFilter',
+                'class' => 'Vaimo\Codeception\Lib\MarkupValidator\DefaultMessageFilter',
                 'config' => 'configuration-parameter',
             ),
         ));
@@ -130,7 +130,7 @@ class MarkupValidatorTest extends TestCase
     {
         $this->module = new MarkupValidator($this->moduleContainer, array(
             'filter' => array(
-                'class' => 'Kolyunya\Codeception\Lib\MarkupValidator\DefaultMessageFilter',
+                'class' => 'Vaimo\Codeception\Lib\MarkupValidator\DefaultMessageFilter',
             ),
         ));
     }

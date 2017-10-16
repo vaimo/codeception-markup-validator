@@ -1,15 +1,15 @@
 <?php
 
-namespace Kolyunya\Codeception\Module;
+namespace Vaimo\Codeception\Module;
 
 use Codeception\Lib\ModuleContainer;
 use Codeception\Module;
 use Exception;
-use Kolyunya\Codeception\Lib\Base\ComponentInterface;
-use Kolyunya\Codeception\Lib\MarkupValidator\MarkupProviderInterface;
-use Kolyunya\Codeception\Lib\MarkupValidator\MarkupValidatorInterface;
-use Kolyunya\Codeception\Lib\MarkupValidator\MessageFilterInterface;
-use Kolyunya\Codeception\Lib\MarkupValidator\MessagePrinterInterface;
+use Vaimo\Codeception\Lib\Base\ComponentInterface;
+use Vaimo\Codeception\Lib\MarkupValidator\MarkupProviderInterface;
+use Vaimo\Codeception\Lib\MarkupValidator\MarkupValidatorInterface;
+use Vaimo\Codeception\Lib\MarkupValidator\MessageFilterInterface;
+use Vaimo\Codeception\Lib\MarkupValidator\MessagePrinterInterface;
 use ReflectionClass;
 
 /**
@@ -34,16 +34,16 @@ class MarkupValidator extends Module
      */
     protected $config = array(
         self::PROVIDER_CONFIG_KEY => array(
-            self::COMPONENT_CLASS_CONFIG_KEY => 'Kolyunya\Codeception\Lib\MarkupValidator\DefaultMarkupProvider',
+            self::COMPONENT_CLASS_CONFIG_KEY => 'Vaimo\Codeception\Lib\MarkupValidator\DefaultMarkupProvider',
         ),
         self::VALIDATOR_CONFIG_KEY => array(
-            self::COMPONENT_CLASS_CONFIG_KEY => 'Kolyunya\Codeception\Lib\MarkupValidator\W3CMarkupValidator',
+            self::COMPONENT_CLASS_CONFIG_KEY => 'Vaimo\Codeception\Lib\MarkupValidator\W3CMarkupValidator',
         ),
         self::FILTER_CONFIG_KEY => array(
-            self::COMPONENT_CLASS_CONFIG_KEY => 'Kolyunya\Codeception\Lib\MarkupValidator\DefaultMessageFilter',
+            self::COMPONENT_CLASS_CONFIG_KEY => 'Vaimo\Codeception\Lib\MarkupValidator\DefaultMessageFilter',
         ),
         self::PRINTER_CONFIG_KEY => array(
-            self::COMPONENT_CLASS_CONFIG_KEY => 'Kolyunya\Codeception\Lib\MarkupValidator\DefaultMessagePrinter',
+            self::COMPONENT_CLASS_CONFIG_KEY => 'Vaimo\Codeception\Lib\MarkupValidator\DefaultMessagePrinter',
         ),
     );
 
@@ -116,7 +116,7 @@ class MarkupValidator extends Module
      */
     private function initializeMarkupProvider()
     {
-        $interface = 'Kolyunya\Codeception\Lib\MarkupValidator\MarkupProviderInterface';
+        $interface = 'Vaimo\Codeception\Lib\MarkupValidator\MarkupProviderInterface';
         $this->markupProvider = $this->instantiateComponent(self::PROVIDER_CONFIG_KEY, $interface, array(
             $this->moduleContainer,
         ));
@@ -127,7 +127,7 @@ class MarkupValidator extends Module
      */
     private function initializeMarkupValidator()
     {
-        $interface = 'Kolyunya\Codeception\Lib\MarkupValidator\MarkupValidatorInterface';
+        $interface = 'Vaimo\Codeception\Lib\MarkupValidator\MarkupValidatorInterface';
         $this->markupValidator = $this->instantiateComponent(self::VALIDATOR_CONFIG_KEY, $interface);
     }
 
@@ -136,7 +136,7 @@ class MarkupValidator extends Module
      */
     private function initializeMessageFilter()
     {
-        $interface = 'Kolyunya\Codeception\Lib\MarkupValidator\MessageFilterInterface';
+        $interface = 'Vaimo\Codeception\Lib\MarkupValidator\MessageFilterInterface';
         $this->messageFilter = $this->instantiateComponent(self::FILTER_CONFIG_KEY, $interface);
     }
 
@@ -145,7 +145,7 @@ class MarkupValidator extends Module
      */
     private function initializeMessagePrinter()
     {
-        $interface = 'Kolyunya\Codeception\Lib\MarkupValidator\MessagePrinterInterface';
+        $interface = 'Vaimo\Codeception\Lib\MarkupValidator\MessagePrinterInterface';
         $this->messagePrinter = $this->instantiateComponent(self::PRINTER_CONFIG_KEY, $interface);
     }
 

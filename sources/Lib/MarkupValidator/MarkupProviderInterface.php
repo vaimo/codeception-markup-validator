@@ -1,9 +1,9 @@
 <?php
 
-namespace Kolyunya\Codeception\Lib\MarkupValidator;
+namespace Vaimo\Codeception\Lib\MarkupValidator;
 
 use Codeception\Lib\ModuleContainer;
-use Kolyunya\Codeception\Lib\Base\ComponentInterface;
+use Vaimo\Codeception\Lib\Base\ComponentInterface;
 
 /**
  * An interface of a markup provider.

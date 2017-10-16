@@ -1,9 +1,9 @@
 <?php
 
-namespace Kolyunya\Codeception\Tests\Lib\MarkupValidator;
+namespace Vaimo\Codeception\Tests\Lib\MarkupValidator;
 
 use Codeception\Lib\ModuleContainer;
-use Kolyunya\Codeception\Lib\MarkupValidator\DefaultMarkupProvider;
+use Vaimo\Codeception\Lib\MarkupValidator\DefaultMarkupProvider;
 use PHPUnit\Framework\TestCase;
 use PHPUnit_Framework_MockObject_MockObject;
 

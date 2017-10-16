@@ -1,9 +1,9 @@
 <?php
 
-namespace Kolyunya\Codeception\Tests\Lib\MarkupValidator;
+namespace Vaimo\Codeception\Tests\Lib\MarkupValidator;
 
-use Kolyunya\Codeception\Lib\MarkupValidator\MarkupValidatorMessage;
-use Kolyunya\Codeception\Lib\MarkupValidator\MarkupValidatorMessageInterface;
+use Vaimo\Codeception\Lib\MarkupValidator\MarkupValidatorMessage;
+use Vaimo\Codeception\Lib\MarkupValidator\MarkupValidatorMessageInterface;
 use PHPUnit\Framework\TestCase;
 
 class MarkupValidatorMessageTest extends TestCase

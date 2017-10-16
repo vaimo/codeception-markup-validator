@@ -1,26 +1,14 @@
 <?php
+namespace Vaimo\Codeception\Lib\MarkupValidator;
 
-namespace Kolyunya\Codeception\Lib\MarkupValidator;
-
-use Exception;
-use Kolyunya\Codeception\Lib\Base\Component;
-use Kolyunya\Codeception\Lib\MarkupValidator\MarkupValidatorMessageInterface;
-use Kolyunya\Codeception\Lib\MarkupValidator\MessageFilterInterface;
-
-/**
- * Default markup validation message filter.
- */
-class DefaultMessageFilter extends Component implements MessageFilterInterface
+class DefaultMessageFilter extends \Vaimo\Codeception\Lib\Base\Component 
+    implements \Vaimo\Codeception\Lib\MarkupValidator\MessageFilterInterface
 {
     const ERROR_COUNT_THRESHOLD_KEY = 'errorCountThreshold';
-
     const IGNORE_WARNINGS_CONFIG_KEY = 'ignoreWarnings';
-
     const IGNORED_ERRORS_CONFIG_KEY = 'ignoredErrors';
 
     /**
-     * Configuration parameters.
-     *
      * @var array
      */
     protected $configuration = array(
@@ -36,101 +24,72 @@ class DefaultMessageFilter extends Component implements MessageFilterInterface
     {
         $filteredMessages = array();
 
+        $targetedTypes = array_filter(
+            array(
+                'ERROR' => true,
+                'WARNING' => !$this->getConfigValue(self::IGNORE_WARNINGS_CONFIG_KEY, 'bool')
+            )
+        );
+
+        $ignoredErrors = $this->getConfigValue(self::IGNORED_ERRORS_CONFIG_KEY, 'array');
+
         foreach ($messages as $message) {
             /* @var $message MarkupValidatorMessageInterface */
-            $messageType = $message->getType();
+            $messageType = strtoupper($message->getType());
 
-            if ($messageType === MarkupValidatorMessageInterface::TYPE_UNDEFINED ||
-                $messageType === MarkupValidatorMessageInterface::TYPE_INFO
-            ) {
+            if (!isset($targetedTypes[$messageType])) {
                 continue;
             }
 
-            if ($messageType === MarkupValidatorMessageInterface::TYPE_WARNING &&
-                $this->ignoreWarnings() === true
-            ) {
-                continue;
-            }
-
-            if ($this->ignoreError($message->getSummary()) === true) {
+            if ($this->shouldIgnoreMessage($message, $ignoredErrors) === true) {
                 continue;
             }
 
             $filteredMessages[] = $message;
         }
 
-        if ($this->belowErrorCountThreshold($filteredMessages) === true) {
-            // Error count threshold was not reached.
+        if (count($messages) <= $this->getConfigValue(self::ERROR_COUNT_THRESHOLD_KEY, 'int')) {
             return array();
         }
 
         return $filteredMessages;
     }
-
-    /**
-     * Returns a boolean indicating whether messages count
-     * is below the threshold or not.
-     *
-     * @param array $messages Messages to report about.
-     *
-     * @return boolean Whether messages count is below the threshold or not.
-     */
-    private function belowErrorCountThreshold(array $messages)
+    
+    private function getConfigValue($key, $type)
     {
-        if (is_int($this->configuration[self::ERROR_COUNT_THRESHOLD_KEY]) === false) {
-            throw new Exception(sprintf('Invalid «%s» config key.', self::ERROR_COUNT_THRESHOLD_KEY));
+        if (call_user_func('is_' . $type, $this->configuration[$key]) === false) {
+            throw new \Exception(
+                sprintf('Invalid «%s» config key.', $key)
+            );
         }
 
-        $threshold = $this->configuration[self::ERROR_COUNT_THRESHOLD_KEY];
-        $belowThreshold = count($messages) <= $threshold;
-
-        return $belowThreshold;
+        return $this->configuration[$key];
     }
 
     /**
-     * Returns a boolean indicating whether the filter ignores warnings or not.
-     *
-     * @return bool Whether the filter ignores warnings or not.
+     * @param object $message
+     * @param array $ignoredPatterns
+     * @return boolean
+     * @throws \Exception
      */
-    private function ignoreWarnings()
+    private function shouldIgnoreMessage($message, array $ignoredPatterns)
     {
-        if (is_bool($this->configuration[self::IGNORE_WARNINGS_CONFIG_KEY]) === false) {
-            throw new Exception(sprintf('Invalid «%s» config key.', self::IGNORE_WARNINGS_CONFIG_KEY));
+        $messageContentItems = array($message->getSummary(), $message->getMarkup());
+        
+        if (!trim(implode('', $messageContentItems))) {
+            return false;
         }
 
-        /* @var $ignoreWarnings bool */
-        $ignoreWarnings = $this->configuration[self::IGNORE_WARNINGS_CONFIG_KEY];
-
-        return $ignoreWarnings;
-    }
-
-    /**
-     * Returns a boolean indicating whether an error is ignored or not.
-     *
-     * @param string|null $summary Error summary.
-     * @return boolean Whether an error is ignored or not.
-     */
-    private function ignoreError($summary)
-    {
-        if (is_array($this->configuration[self::IGNORED_ERRORS_CONFIG_KEY]) === false) {
-            throw new Exception(sprintf('Invalid «%s» config key.', self::IGNORED_ERRORS_CONFIG_KEY));
-        }
-
-        $ignoreError = false;
-
-        if ($summary === null) {
-            return $ignoreError;
-        }
-
-        $ignoredErrors = $this->configuration[self::IGNORED_ERRORS_CONFIG_KEY];
-        foreach ($ignoredErrors as $ignoredError) {
-            $erorIsIgnored = preg_match($ignoredError, $summary) === 1;
-            if ($erorIsIgnored) {
-                $ignoreError = true;
-                break;
+        $messageContent = implode('|', $messageContentItems);
+        
+        foreach ($ignoredPatterns as $pattern) {
+            if (!preg_match('/' . $pattern . '/', $messageContent)) {
+                continue;
             }
+            
+            return true;
         }
 
-        return $ignoreError;
+        return false;
     }
 }

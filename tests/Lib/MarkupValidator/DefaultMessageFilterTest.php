@@ -1,11 +1,11 @@
 <?php
 
-namespace Kolyunya\Codeception\Tests\Lib\MarkupValidator;
+namespace Vaimo\Codeception\Tests\Lib\MarkupValidator;
 
 use Exception;
-use Kolyunya\Codeception\Lib\MarkupValidator\DefaultMessageFilter;
-use Kolyunya\Codeception\Lib\MarkupValidator\MarkupValidatorMessage;
-use Kolyunya\Codeception\Lib\MarkupValidator\MarkupValidatorMessageInterface;
+use Vaimo\Codeception\Lib\MarkupValidator\DefaultMessageFilter;
+use Vaimo\Codeception\Lib\MarkupValidator\MarkupValidatorMessage;
+use Vaimo\Codeception\Lib\MarkupValidator\MarkupValidatorMessageInterface;
 use PHPUnit\Framework\TestCase;
 
 class DefaultMessageFilterTest extends TestCase

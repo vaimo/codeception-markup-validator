@@ -1,9 +1,9 @@
 <?php
 
-namespace Kolyunya\Codeception\Lib\MarkupValidator;
+namespace Vaimo\Codeception\Lib\MarkupValidator;
 
-use Kolyunya\Codeception\Lib\Base\ComponentInterface;
-use Kolyunya\Codeception\Lib\MarkupValidator\MarkupValidatorMessageInterface;
+use Vaimo\Codeception\Lib\Base\ComponentInterface;
+use Vaimo\Codeception\Lib\MarkupValidator\MarkupValidatorMessageInterface;
 
 /**
  * An interface of a markup validator message printer.
