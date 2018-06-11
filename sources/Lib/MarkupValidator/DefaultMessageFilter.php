@@ -1,7 +1,7 @@
 <?php
 namespace Vaimo\Codeception\Lib\MarkupValidator;
 
-class DefaultMessageFilter extends \Vaimo\Codeception\Lib\Base\Component 
+class DefaultMessageFilter extends \Vaimo\Codeception\Lib\Base\Component
     implements \Vaimo\Codeception\Lib\MarkupValidator\MessageFilterInterface
 {
     const ERROR_COUNT_THRESHOLD_KEY = 'errorCountThreshold';
@@ -16,6 +16,19 @@ class DefaultMessageFilter extends \Vaimo\Codeception\Lib\Base\Component
         self::IGNORE_WARNINGS_CONFIG_KEY => true,
         self::IGNORED_ERRORS_CONFIG_KEY => array(),
     );
+
+    protected $regexDelimiters = [
+        '@', '$', ']', '}', '.', ',', '-', ')', '~', '>', '!', '&', '|', '/', '#', '?', ':', '_', '+', '=', '%', ';'
+    ];
+
+    public function determineDelimiter($value)
+    {
+        $subset = array_filter($this->regexDelimiters, function ($delimiter) use ($value) {
+            return strpos($value, $delimiter) === false;
+        });
+
+        return reset($subset);
+    }
 
     /**
      * {@inheritDoc}
@@ -54,7 +67,7 @@ class DefaultMessageFilter extends \Vaimo\Codeception\Lib\Base\Component
 
         return $filteredMessages;
     }
-    
+
     private function getConfigValue($key, $type)
     {
         if (call_user_func('is_' . $type, $this->configuration[$key]) === false) {
@@ -75,19 +88,19 @@ class DefaultMessageFilter extends \Vaimo\Codeception\Lib\Base\Component
     private function shouldIgnoreMessage($message, array $ignoredPatterns)
     {
         $messageContentItems = array($message->getSummary(), $message->getMarkup());
-        
+
         if (!trim(implode('', $messageContentItems))) {
             return false;
         }
 
         $messageContent = implode('|', $messageContentItems);
-        
+
         foreach ($ignoredPatterns as $pattern) {
-            if (!preg_match('/' . $pattern . '/', $messageContent)) {
-                continue;
+            $delimiter = $this->determineDelimiter($pattern);
+
+            if (preg_match($delimiter . $pattern . $delimiter, $messageContent)) {
+                return true;
             }
-            
-            return true;
         }
 
         return false;
